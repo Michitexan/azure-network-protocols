@@ -79,8 +79,17 @@ To get started with this exploration of Network communication, we will need to s
 <img src="https://i.imgur.com/uAj8K1A.jpeg" height="40%" width="40%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-In Wireshark, change the filter from "ICMP" to "SSH". Refreesh the list to clear the previous activity, and to start with a cleared screen. 
+<img src="https://i.imgur.com/mDYjw3N.jpeg" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+In Wireshark, change the filter from "ICMP" to "SSH". Refreesh the list to clear the previous activity, and to start with a cleared screen. In PowerShell, type the command "ssh (UserID)@(Linux Machine's Private IP Address)", as seen in the image above. Hit enter, and observe the data as it appears in Wireshark. Type "Yes", and enter the password you created for the Linux machine. Note that the password will not appear as you type it in SSH. This is normal. You should now have an open connection to the Linux machine through SSH. PowerShell is now connected to the Linux Command line, so Linux Commands will have the intended effect. Notice the data travel across the network with each command that is entered. To close the SSH Session, Type "exit". Once the session is closed, notice that commands in PowerShell no longer generate new SSH data.
 </p>
 <br />
 
 <h2>Observe DHCP Traffic</h2>
+<p>
+<img src="https://i.imgur.com/L5OpLdm.jpeg" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+  In Wireshark, Change the filter to "DHCP", and refresh. As this dataset is used for IP address configuration, the easiest way to observe this data transfer is to type "ipconfig /renew", in PowerShell. THer is a chance that the Remote Desktop session could disconnect for a moment as Azure handles the request for a new IP address, but it should reconnect. Observe the DHCP traffic from the request, in Wireshark.
+</p>
