@@ -6,9 +6,6 @@
 In this tutorial, we observe various network traffic to and from Azure Virtual Machines with Wireshark as well as experiment with Network Security Groups. <br />
 
 
-<h2>Video Demonstration</h2>
-
-- ### [YouTube: Azure Virtual Machines, Wireshark, and Network Security Groups](https://www.youtube.com)
 
 <h2>Environments and Technologies Used</h2>
 
@@ -53,13 +50,37 @@ To get started with this exploration of Network communication, we will need to s
   To begin the observing network traffic, Click on the blue sharkfin icon. This will show all the information that is going in and out of the virtual machine. Ther is quite a lot of information. To make use of this information it is important to use filters. The first filter we will explore will focus on ICMP, or Ping. Type ICMP into the filter bar at the top of the window, to filter out all information that is not ICMP traffic. Notice that there is not any Ping data at this time. 
 
   Minimize the WIndows Virtual Machine, and bring up Azure. Locate and copy the private IP address for the Linux machine you made earlier. We will use this to test Ping connectivivity, or ICMP traffic. Once you have copied, or otherwise noted the IP address, return to the Windows Virtual Machine. 
+  </p>
+  <p>
+<img src="https://i.imgur.com/99RElOd.jpeg" height="40%" width="40%" alt="Disk Sanitization Steps"/>
+</p>
+<p>
+  Using the search function of the Start Menu, locate "PowerShell", and open the program. Type into the command line "ping (Linux Machine's Private IP Address)". As seen in the above picture. Press "enter". This will trigger a reaction in both PowerShell, and in Wireshark, as the ICMP data is sent and recieved. Observe the call and responce of the Ping of ICMP data between the two machines. This can be seen not just between the two machines set up in this activity, but also between any two machines. Try pinging "Google.com", and observe the same call and response that you saw between the two control machines.
+
+  The next step ofour activity will involve Azure network Security Groups. While PowerShell is still open, type "ping (Linux Machine's Private IP Address) -t" to create a perpetual ping. You should see a continuous flow of data with each call and response between the two machines. Minimize the Windows Virtual Machine, and bring up the Azure portal. Using the Search bar, look for "Network Security Groups". Open the page, and select the Linux machine in the list of netwerk security groups provided. Navigate to "Inbound Security Rules" on the left-hand menu, and click on it to open the page. Notice the rules listed for incoming data traffic. To create a new rule, click the "+ Add" button. 
+
+  For the purposes of this activity, select the following options for this new rule
+  Source: any
+  Source Port Ranges: Any
+  Destination: Any
+  Protocol: ICMP
+  Action: Deny
+  Priority: 200
+  Name: DENY_ICMP
+
+  Finalize the rule, by clicking "Add". This will install the new rule that will stop all ICMP traffic. Bring up the Windows Virtual Machine. Observe that the flow of Data in Wireshark no longer has replies from the Linux machine now that the rule is in place. Minimize the Microsoft Windows Firtual Machine, and bring up the Azure portal. Click on the rule name to edit the rule we just created. Change the Action from "Deny", to "Allow", and save the changes. Bring up the Windows Virtual Machine again, and observe how the Requests from the continuous ping are once again recieving replies. 
+
+  End the continuous ping by pressing "Ctrl+C"
 </p>
 <br />
 
+<h2>Observe SSH Traffic</h2>
 <p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
+<img src="https://i.imgur.com/uAj8K1A.jpeg" height="40%" width="40%" alt="Disk Sanitization Steps"/>
 </p>
 <p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+In Wireshark, change the filter from "ICMP" to "SSH". Refreesh the list to clear the previous activity, and to start with a cleared screen. 
 </p>
 <br />
+
+<h2>Observe DHCP Traffic</h2>
